@@ -24,6 +24,15 @@ public class Archiver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        try {
+            FileOutputStream fos = new FileOutputStream("arqcompactado.zip");
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+	}
+        catch (IOException e) {
+            e.printStackTrace();
+	}
         // TODO code application logic here
     }
     
