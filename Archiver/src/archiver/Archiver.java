@@ -26,6 +26,7 @@ public class Archiver {
     public static void main(String[] args) {
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.zip");
+            ZipOutputStream zos = new ZipOutputStream(fos);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
