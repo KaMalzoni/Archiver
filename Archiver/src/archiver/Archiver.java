@@ -29,12 +29,12 @@ public class Archiver {
         System.out.println("Please insert the number of files to be compressed");
         Integer nmbf = new Integer (sc.nextLine());
         String [] files = new String [nmbf]; 
-        System.out.println("Please insert the name of the file to be compressed");
-        File fname = new File (sc.nextLine());
+        //System.out.println("Please insert the name of the file to be compressed");
+        //File fname = new File (sc.nextLine());
         for (int i = 0; i < files.length; i++){
-            files[i] = fname.toString();
             System.out.println("Please insert the name of the file to be compressed");
-            fname = new File (sc.nextLine());
+            File fname = new File (sc.nextLine());
+            files[i] = fname.toString();
         }
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.zip");
