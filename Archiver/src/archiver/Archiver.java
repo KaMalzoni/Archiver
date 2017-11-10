@@ -30,7 +30,7 @@ public class Archiver {
         Integer nmbf = new Integer (sc.nextLine());
         String [] files = new String [nmbf]; 
         //System.out.println("Please insert the name of the file to be compressed");
-        //File fname = new File (sc.nextLine());
+        //File fname = new File (sc.nextLine())
         for (int i = 0; i < files.length; i++){
             System.out.println("Please insert the name of the file to be compressed");
             File fname = new File (sc.nextLine());
