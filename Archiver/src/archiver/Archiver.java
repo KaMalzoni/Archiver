@@ -62,7 +62,7 @@ public class Archiver {
 		File file = new File(fileName);
 		FileInputStream fis = new FileInputStream(file);
 		//ZipEntry zipEntry = new ZipEntry(fileName);
-		//fos.putNextEntry(fileEntry);
+		//fos.putNextEntry(zipEntry);
 
 		byte[] bytes = new byte[1024];
 		int length;
@@ -72,8 +72,9 @@ public class Archiver {
 
 		fis.close();
 	}
-
-    public static void cleanUP (FileOutputStream fos) throws IOException{
+    
+//criei pq estava fechando o OutputStream antes do final da execução do programa
+    public static void cleanUP (FileOutputStream fos) throws IOException{ 
         fos.close();
     }
 }
