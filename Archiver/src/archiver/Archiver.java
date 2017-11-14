@@ -30,7 +30,7 @@ public class Archiver {
         Integer nmbf = new Integer (sc.nextLine());
         String [] files = new String [nmbf]; 
         //System.out.println("Please insert the name of the file to be compressed");
-        //File fname = new File (sc.nextLine())
+        //File fname = new File (sc.nextLine());
         for (int i = 0; i < files.length; i++){
             System.out.println("Please insert the name of the file to be compressed");
             File fname = new File (sc.nextLine());
@@ -38,11 +38,11 @@ public class Archiver {
         }
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.zip");
-            ZipOutputStream zos = new ZipOutputStream(fos);
+            //ZipOutputStream zos = new ZipOutputStream(fos);
             for (int i = 0; i < files.length; i++) {
-                addToZipFile(files[i], zos);
+                addToZipFile(files[i], fos);
             }
-            zos.close();
+            //zos.close();
             fos.close();
         }
         catch (FileNotFoundException e) {
@@ -54,22 +54,22 @@ public class Archiver {
         // TODO code application logic here
     }
     
-    public static void addToZipFile(String fileName, ZipOutputStream zos) throws FileNotFoundException, IOException {
+    public static void addToZipFile(String fileName, FileOutputStream fos) throws FileNotFoundException, IOException {
 
 		System.out.println("Writing '" + fileName + "' to zip file");
 
 		File file = new File(fileName);
 		FileInputStream fis = new FileInputStream(file);
-		ZipEntry zipEntry = new ZipEntry(fileName);
-		zos.putNextEntry(zipEntry);
+		//ZipEntry zipEntry = new ZipEntry(fileName);
+		//fos.putNextEntry(fileEntry);
 
 		byte[] bytes = new byte[1024];
 		int length;
 		while ((length = fis.read(bytes)) >= 0) {
-			zos.write(bytes, 0, length);
+			fos.write(bytes, 0, length);
 		}
 
-		zos.closeEntry();
+		fos.close();
 		fis.close();
 	}
 
