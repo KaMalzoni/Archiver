@@ -37,13 +37,13 @@ public class Archiver {
             files[i] = fname.toString();
         }
         try {
-            FileOutputStream fos = new FileOutputStream("arqcompactado.zip");
+            FileOutputStream fos = new FileOutputStream("arqcompactado");
             //ZipOutputStream zos = new ZipOutputStream(fos);
             for (int i = 0; i < files.length; i++) {
                 addToZipFile(files[i], fos);
             }
             //zos.close();
-            fos.close();
+            cleanUP(fos);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -51,6 +51,7 @@ public class Archiver {
         catch (IOException e) {
             e.printStackTrace();
 	}
+        
         // TODO code application logic here
     }
     
@@ -69,9 +70,10 @@ public class Archiver {
 			fos.write(bytes, 0, length);
 		}
 
-		fos.close();
 		fis.close();
 	}
 
-    
+    public static void cleanUP (FileOutputStream fos) throws IOException{
+        fos.close();
+    }
 }
