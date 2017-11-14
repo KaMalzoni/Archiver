@@ -37,7 +37,7 @@ public class Archiver {
             files[i] = fname.toString();
         }
         try {
-            FileOutputStream fos = new FileOutputStream("arqcompactado.zip");
+            FileOutputStream fos = new FileOutputStream("arqcompactado");
             //ZipOutputStream zos = new ZipOutputStream(fos);
             for (int i = 0; i < files.length; i++) {
                 addToZipFile(files[i], fos);
