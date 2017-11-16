@@ -28,7 +28,14 @@ public class Archiver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What would you like to do?");
+        System.out.println("1. Start an archive from zero;");
+        System.out.println("2. Add a file to the archive;");
+        System.out.println("3. List all the files on the archive;");
+        System.out.println("4. Extract a file from the archive;");
+        System.out.println("5. Remove a file from the archive.");
+        Integer option = new Integer (sc.nextLine());
     }
     
     public void StartFromZero () {
