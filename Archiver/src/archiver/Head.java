@@ -16,7 +16,7 @@ public class Head implements Serializable {
     protected String nome = new String();
 
     /**
-     *
+     * number of bytes
      */
     protected Long size;
     protected Integer pos;

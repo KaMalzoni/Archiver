@@ -69,7 +69,6 @@ public class Archiver {
 		while ((length = fis.read(bytes)) >= 0) {
 			fos.write(bytes, 0, length);
 		}
-
 		fis.close();
 	}
     
