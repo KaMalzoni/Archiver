@@ -27,7 +27,7 @@ public class Archiver {
     /**
      * @param args the command line arguments
      */
-    public void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do?");
         System.out.println("1. Start an archive from zero;");
@@ -57,7 +57,7 @@ public class Archiver {
     /**
      * aqui está o javadoc de startfromzero
      */
-    public void StartFromZero () {
+    public static void StartFromZero () {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please insert the number of files to be compressed");
         Integer nmbf = new Integer (sc.nextLine()); 
