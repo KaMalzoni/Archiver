@@ -76,9 +76,21 @@ public class Archiver {
         fos.close();
     }
     
-    public static void ListFiles (Iterable<Head> listOfHeads) {
+    public static void ListFiles (ArrayList<Head> listOfHeads) {
         for(Head head : listOfHeads){
             System.out.println(head.nome);
         }
         }
+    
+    public static void RemoveFile (String nome, ArrayList<Head> listOfHeads) { //remover o srquivo do archive
+        for(Head head : listOfHeads){
+            if (head.nome.equals(nome)) {
+                head.status = false;
+            }
+        }
+    }
+    
+    public static void ExtractFile (String nome) { //extrair o arquivo do archive (cria CÓPIA)
+        
+    }
     }
