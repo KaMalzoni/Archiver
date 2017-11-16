@@ -29,20 +29,16 @@ public class Archiver {
         System.out.println("Please insert the number of files to be compressed");
         Integer nmbf = new Integer (sc.nextLine());
         String [] files = new String [nmbf]; 
-        //System.out.println("Please insert the name of the file to be compressed");
-        //File fname = new File (sc.nextLine());
         for (int i = 0; i < files.length; i++){
             System.out.println("Please insert the name of the file to be compressed");
             File fname = new File (sc.nextLine());
             files[i] = fname.toString();
         }
         try {
-            FileOutputStream fos = new FileOutputStream("arqcompactado");
-            //ZipOutputStream zos = new ZipOutputStream(fos);
+            FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
             for (int i = 0; i < files.length; i++) {
                 addToZipFile(files[i], fos);
             }
-            //zos.close();
             cleanUP(fos);
         }
         catch (FileNotFoundException e) {
@@ -61,8 +57,6 @@ public class Archiver {
 
 		File file = new File(fileName);
 		FileInputStream fis = new FileInputStream(file);
-		//ZipEntry zipEntry = new ZipEntry(fileName);
-		//fos.putNextEntry(zipEntry);
 
 		byte[] bytes = new byte[1024];
 		int length;
