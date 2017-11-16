@@ -41,7 +41,6 @@ public class Archiver {
         }
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
-            // Fazer a logica para gravar os Heads
             for(Head head : listOfHeads){
                 fos.write(head.getBytes(), 0, Head.getHeadSize());
             }
