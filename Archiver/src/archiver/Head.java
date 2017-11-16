@@ -22,28 +22,71 @@ public class Head implements Serializable {
     protected Integer pos;
     protected Boolean status;
     protected Integer rn;
-    
-    protected void SetNome (String n) {
-        this.nome = n;
+    protected Integer quantidade;
+
+    public Head(Long size, Integer pos, Boolean status, Integer rn, Integer quantidade) {
+        this.size = size;
+        this.pos = pos;
+        this.status = status;
+        this.rn = rn;
+        this.quantidade = quantidade;
     }
 
-    /**
-     *
-     * @param i
-     */
-    protected void SetSize (Long i) {
-        this.size = i;
+    public String getNome() {
+        return nome;
     }
-    protected void SetPos (Integer i) {
-        this.pos = i;
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    protected void SetStatus (Boolean i) {
-        this.status = i;
+
+    public Long getSize() {
+        return size;
     }
-    protected void SetRn (Integer i) {
-        this.rn = i;
+
+    public void setSize(Long size) {
+        this.size = size;
     }
-    protected void GravarArq () {
-        
+
+    public Integer getPos() {
+        return pos;
     }
+
+    public void setPos(Integer pos) {
+        this.pos = pos;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Integer getRn() {
+        return rn;
+    }
+
+    public void setRn(Integer rn) {
+        this.rn = rn;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    //TODO
+    public static int getHeadSize(){
+        return 1024; // FAZER!!!!
+    }
+    
+    public byte[] getBytes(){
+        return new byte[1024]; // Fazer
+    }
+    
 }

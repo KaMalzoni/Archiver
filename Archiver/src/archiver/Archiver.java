@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Archiver {
 
@@ -24,26 +25,26 @@ public class Archiver {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<Head> listOfHeads = new ArrayList();
+        int headSize = Head.getHeadSize();
         System.out.println("Please insert the number of files to be compressed");
         Integer nmbf = new Integer (sc.nextLine());
         String [] files = new String [nmbf]; 
+        int pos = nmbf * headSize;
         for (int i = 0; i < files.length; i++){
             System.out.println("Please insert the name of the file to be compressed");
             File fname = new File (sc.nextLine());
             files[i] = fname.toString();
-            Head cab = new Head();
-            cab.SetNome(files[i]);
-            cab.SetStatus(Boolean.TRUE);
-            cab.SetSize(fname.length());
-            cab.SetRn(i);
-            if (i==0) {
-                cab.SetPos(i);
-            } else {
-                cab.SetPos(cab.rn==(i-1).size==cab.rn + (i-1).pos); //ONDE COMEÇA O ANTERIOR + O TAMANHO DO ANTERIOR
-            }
+            Head cab = new Head(fname.length(),pos,true,i,nmbf);
+            listOfHeads.add(cab);
+            pos += fname.length();
         }
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
+            // Fazer a logica para gravar os Heads
+            for(Head head : listOfHeads){
+                fos.write(head.getBytes(), 0, Head.getHeadSize());
+            }
             for (String file : files) {
                 addToZipFile(file, fos);
             }
@@ -60,10 +61,9 @@ public class Archiver {
     public static void addToZipFile(String fileName, FileOutputStream fos) throws FileNotFoundException, IOException {
 
 		System.out.println("Writing '" + fileName + "' to zip file");
-
-		File file = new File(fileName);
+                
+                File file = new File(fileName);
 		FileInputStream fis = new FileInputStream(file);
-
 		byte[] bytes = new byte[1024];
 		int length;
 		while ((length = fis.read(bytes)) >= 0) {
