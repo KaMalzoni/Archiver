@@ -75,4 +75,10 @@ public class Archiver {
     public static void cleanUP (FileOutputStream fos) throws IOException{ 
         fos.close();
     }
-}
+    
+    public static void ListFiles (Iterable<Head> listOfHeads) {
+        for(Head head : listOfHeads){
+            System.out.println(head.nome);
+        }
+        }
+    }
