@@ -20,16 +20,22 @@ import java.util.ArrayList;
 
 public class Archiver {
 
+    ArrayList<Head> listOfHeads = new ArrayList();
+    int headSize = Head.getHeadSize();
+    String [] files; 
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+    }
+    
+    public void StartFromZero () {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Head> listOfHeads = new ArrayList();
-        int headSize = Head.getHeadSize();
         System.out.println("Please insert the number of files to be compressed");
-        Integer nmbf = new Integer (sc.nextLine());
-        String [] files = new String [nmbf]; 
+        Integer nmbf = new Integer (sc.nextLine()); 
+        files = new String [nmbf];
         int pos = nmbf * headSize;
         for (int i = 0; i < files.length; i++){
             System.out.println("Please insert the name of the file to be compressed");
@@ -53,8 +59,6 @@ public class Archiver {
 	}
         catch (IOException e) {
 	}
-        
-        // TODO code application logic here
     }
     
     public static void addToZipFile(String fileName, FileOutputStream fos) throws FileNotFoundException, IOException {
@@ -71,18 +75,18 @@ public class Archiver {
 		fis.close();
 	}
     
-//criei pq estava fechando o OutputStream antes do final da execução do programa
-    public static void cleanUP (FileOutputStream fos) throws IOException{ 
+    //criei pq estava fechando o OutputStream antes do final da execução do programa
+    public static void cleanUP (FileOutputStream fos) throws IOException{               //OK
         fos.close();
     }
     
-    public static void ListFiles (ArrayList<Head> listOfHeads) {
+    public void ListFiles () {                                                   //OK
         for(Head head : listOfHeads){
             System.out.println(head.nome);
         }
         }
     
-    public static void RemoveFile (String nome, ArrayList<Head> listOfHeads) { //remover o srquivo do archive
+    public static void RemoveFile (String nome, ArrayList<Head> listOfHeads) { //remover o arquivo do archive
         for(Head head : listOfHeads){
             if (head.nome.equals(nome)) {
                 head.status = false;
