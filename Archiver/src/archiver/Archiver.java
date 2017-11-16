@@ -16,8 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.util.ArrayList;
 
 public class Archiver {
 
@@ -26,30 +25,33 @@ public class Archiver {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<Head> listOfHeads = new ArrayList();
+        int headSize = Head.getHeadSize();
         System.out.println("Please insert the number of files to be compressed");
         Integer nmbf = new Integer (sc.nextLine());
         String [] files = new String [nmbf]; 
-        //System.out.println("Please insert the name of the file to be compressed");
-        //File fname = new File (sc.nextLine());
+        int pos = nmbf * headSize;
         for (int i = 0; i < files.length; i++){
             System.out.println("Please insert the name of the file to be compressed");
             File fname = new File (sc.nextLine());
             files[i] = fname.toString();
+            Head cab = new Head(fname.length(),pos,true,i,nmbf);
+            listOfHeads.add(cab);
+            pos += fname.length();
         }
         try {
-            FileOutputStream fos = new FileOutputStream("arqcompactado");
-            //ZipOutputStream zos = new ZipOutputStream(fos);
-            for (int i = 0; i < files.length; i++) {
-                addToZipFile(files[i], fos);
+            FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
+            for(Head head : listOfHeads){
+                fos.write(head.getBytes(), 0, Head.getHeadSize());
             }
-            //zos.close();
+            for (String file : files) {
+                addToZipFile(file, fos);
+            }
             cleanUP(fos);
         }
         catch (FileNotFoundException e) {
-            e.printStackTrace();
 	}
         catch (IOException e) {
-            e.printStackTrace();
 	}
         
         // TODO code application logic here
@@ -58,18 +60,14 @@ public class Archiver {
     public static void addToZipFile(String fileName, FileOutputStream fos) throws FileNotFoundException, IOException {
 
 		System.out.println("Writing '" + fileName + "' to zip file");
-
-		File file = new File(fileName);
+                
+                File file = new File(fileName);
 		FileInputStream fis = new FileInputStream(file);
-		//ZipEntry zipEntry = new ZipEntry(fileName);
-		//fos.putNextEntry(zipEntry);
-
 		byte[] bytes = new byte[1024];
 		int length;
 		while ((length = fis.read(bytes)) >= 0) {
 			fos.write(bytes, 0, length);
 		}
-
 		fis.close();
 	}
     
