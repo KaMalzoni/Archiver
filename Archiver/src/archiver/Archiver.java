@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class Archiver {
 
-    ArrayList<Head> listOfHeads = new ArrayList();
-    int headSize = Head.getHeadSize();
-    String [] files; 
+    public static ArrayList<Head> listOfHeads = new ArrayList();
+    public static int headSize = Head.getHeadSize();
+    public static String [] files; 
     
     /**
      * @param args the command line arguments
@@ -106,13 +106,13 @@ public class Archiver {
         fos.close();
     }
     
-    public void ListFiles () {                                                   //OK
+    public static void ListFiles () {                                                   //OK
         for(Head head : listOfHeads){
             System.out.println(head.nome);
         }
         }
     
-    public void RemoveFile (String nome) { //remover o arquivo do archive
+    public static void RemoveFile (String nome) { //remover o arquivo do archive
         for(Head head : listOfHeads){
             if (head.nome.equals(nome)) {
                 head.status = false;
@@ -124,7 +124,7 @@ public class Archiver {
         
     }
     
-    public void AddFile() {
+    public static void AddFile() {
         
     }
     }
