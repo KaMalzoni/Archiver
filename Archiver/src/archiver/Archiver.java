@@ -120,8 +120,19 @@ public class Archiver {
         }
     }
     
-    public static void ExtractFile (String nome) { //extrair o arquivo do archive (cria CÓPIA)
-        
+    public static FileOutputStream ExtractFile (String nome, FileOutputStream f) throws IOException { //extrair o arquivo do archive (cria CÓPIA)
+        for(Head head : listOfHeads){
+            if (head.nome.equals(nome)) {
+                FileInputStream fis = new FileInputStream(nome);
+		byte[] bytes = new byte[1024];
+		int length;
+		while ((length = fis.read(bytes)) >= 0) {
+			f.write(bytes, 0, length);
+		}
+		fis.close();
+            }
+        }
+        return f;
     }
     
     public static void AddFile() {
