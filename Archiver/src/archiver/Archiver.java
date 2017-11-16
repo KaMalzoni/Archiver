@@ -16,8 +16,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 public class Archiver {
 
@@ -33,19 +31,27 @@ public class Archiver {
             System.out.println("Please insert the name of the file to be compressed");
             File fname = new File (sc.nextLine());
             files[i] = fname.toString();
+            Head cab = new Head();
+            cab.SetNome(files[i]);
+            cab.SetStatus(Boolean.TRUE);
+            cab.SetSize(fname.length());
+            cab.SetRn(i);
+            if (i==0) {
+                cab.SetPos(i);
+            } else {
+                cab.SetPos((cab.rn==i-1).pos + (cab.rn==i-1).size); //ONDE COMEÇA O ANTERIOR + O TAMANHO DO ANTERIOR
+            }
         }
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
-            for (int i = 0; i < files.length; i++) {
-                addToZipFile(files[i], fos);
+            for (String file : files) {
+                addToZipFile(file, fos);
             }
             cleanUP(fos);
         }
         catch (FileNotFoundException e) {
-            e.printStackTrace();
 	}
         catch (IOException e) {
-            e.printStackTrace();
 	}
         
         // TODO code application logic here

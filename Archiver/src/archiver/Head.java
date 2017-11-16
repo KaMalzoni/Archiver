@@ -14,14 +14,24 @@ import java.io.Serializable;
 public class Head implements Serializable {
     
     protected String nome = new String();
-    protected Integer size;
+
+    /**
+     *
+     */
+    protected Long size;
     protected Integer pos;
     protected Boolean status;
+    protected Integer rn;
     
     protected void SetNome (String n) {
         this.nome = n;
     }
-    protected void SetSize (Integer i) {
+
+    /**
+     *
+     * @param i
+     */
+    protected void SetSize (Long i) {
         this.size = i;
     }
     protected void SetPos (Integer i) {
@@ -29,5 +39,11 @@ public class Head implements Serializable {
     }
     protected void SetStatus (Boolean i) {
         this.status = i;
+    }
+    protected void SetRn (Integer i) {
+        this.rn = i;
+    }
+    protected void GravarArq () {
+        
     }
 }
