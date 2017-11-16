@@ -39,7 +39,7 @@ public class Archiver {
             if (i==0) {
                 cab.SetPos(i);
             } else {
-                cab.SetPos((cab.rn==i-1).pos + (cab.rn==i-1).size); //ONDE COMEÇA O ANTERIOR + O TAMANHO DO ANTERIOR
+                cab.SetPos(cab.rn==(i-1).size==cab.rn + (i-1).pos); //ONDE COMEÇA O ANTERIOR + O TAMANHO DO ANTERIOR
             }
         }
         try {
