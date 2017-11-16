@@ -27,7 +27,7 @@ public class Archiver {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do?");
         System.out.println("1. Start an archive from zero;");
@@ -36,8 +36,27 @@ public class Archiver {
         System.out.println("4. Extract a file from the archive;");
         System.out.println("5. Remove a file from the archive.");
         Integer option = new Integer (sc.nextLine());
+        switch (option) {
+            case (1): 
+                StartFromZero();
+            case (2):
+                AddFile();
+            case(3):
+                ListFiles();
+            case(4):
+                Scanner scnr = new Scanner(System.in);
+                String name = scnr.nextLine();
+                ExtractFile(name);
+            case(5):
+                Scanner scan = new Scanner(System.in);
+                String nme = scan.nextLine();
+                RemoveFile(nme);
+        }
     }
     
+    /**
+     * aqui está o javadoc de startfromzero
+     */
     public void StartFromZero () {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please insert the number of files to be compressed");
@@ -93,7 +112,7 @@ public class Archiver {
         }
         }
     
-    public static void RemoveFile (String nome, ArrayList<Head> listOfHeads) { //remover o arquivo do archive
+    public void RemoveFile (String nome) { //remover o arquivo do archive
         for(Head head : listOfHeads){
             if (head.nome.equals(nome)) {
                 head.status = false;
@@ -102,6 +121,10 @@ public class Archiver {
     }
     
     public static void ExtractFile (String nome) { //extrair o arquivo do archive (cria CÓPIA)
+        
+    }
+    
+    public void AddFile() {
         
     }
     }
