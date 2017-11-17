@@ -34,9 +34,9 @@ public class Archiver {
         Integer nmb = new Integer (sc.nextLine());
         if (nmb == 1) {
             menu();
-        } else {
-            
         }
+            
+        
     }
     
     public static void menu () {
@@ -49,13 +49,19 @@ public class Archiver {
         System.out.println("5. Remove a file from the archive.");
         Integer option = new Integer (sc.nextLine());
         switch (option) {
-            case (1): 
+            case (1): {
                 StartFromZero();
-            case (2):
+                break;
+            }
+            case (2): {
                 AddFile();
-            case(3):
-                ListFiles();
-            case(4):
+                break;
+            }
+            case(3): {
+                ListFiles(); 
+                break;
+            }
+            case(4): {
                 System.out.println("Insert the name os the file to bem extracted");
                 Scanner scnr = new Scanner(System.in);
                 String name = scnr.nextLine();
@@ -65,13 +71,16 @@ public class Archiver {
                 catch (IOException e) {
                     System.out.println("Error");
                 }
-            case(5):
+                break;
+            }
+            case(5): {
                 System.out.println("Insert the name os the file to bem removed");
                 Scanner scan = new Scanner(System.in);
                 String nme = scan.nextLine();
                 RemoveFile(nme);
+            break;
+            }
         }
-        return option;
     }
     
     /**
@@ -94,8 +103,8 @@ public class Archiver {
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
             for(Head head : listOfHeads){
-                addToZipFile(head.nome, fos);
-                //fos.write(head.getBytes(), 0, Head.getHeadSize());
+                //addToZipFile(head.nome, fos);
+                fos.write(head.getBytes(), 0, Head.getHeadSize());
             }
             for (String file : files) {
                 addToZipFile(file, fos);
