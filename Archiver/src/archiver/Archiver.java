@@ -39,7 +39,7 @@ public class Archiver {
         }
     }
     
-    public static int menu () {
+    public static void menu () {
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do?");
         System.out.println("1. Start an archive from zero;");
@@ -56,6 +56,7 @@ public class Archiver {
             case(3):
                 ListFiles();
             case(4):
+                System.out.println("Insert the name os the file to bem extracted");
                 Scanner scnr = new Scanner(System.in);
                 String name = scnr.nextLine();
                 try {
@@ -65,6 +66,7 @@ public class Archiver {
                     System.out.println("Error");
                 }
             case(5):
+                System.out.println("Insert the name os the file to bem removed");
                 Scanner scan = new Scanner(System.in);
                 String nme = scan.nextLine();
                 RemoveFile(nme);
