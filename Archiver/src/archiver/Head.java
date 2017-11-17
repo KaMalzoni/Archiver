@@ -82,7 +82,7 @@ public class Head implements Serializable {
     
     //TODO
     public static int getHeadSize(){
-        return 1024; // FAZER!!!!
+        return 71;
     }
     
     public byte[] getBytes(){
