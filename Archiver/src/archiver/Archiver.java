@@ -29,14 +29,16 @@ public class Archiver {
      */
     public static void main(String[] args) {
         menu();
+        int aux;
+        do {
         System.out.println("Press 1 to do another operation");
         Scanner sc = new Scanner(System.in);
         Integer nmb = new Integer (sc.nextLine());
         if (nmb == 1) {
             menu();
         }
-            
-        
+        aux = nmb;
+        } while (aux == 1);
     }
     
     public static void menu () {
@@ -82,7 +84,6 @@ public class Archiver {
             }
         }
     }
-    
     /**
      * aqui está o javadoc de startfromzero
      */
