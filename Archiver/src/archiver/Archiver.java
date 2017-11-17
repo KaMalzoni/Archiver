@@ -28,22 +28,14 @@ public class Archiver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Integer nmb = menu();
-        switch (nmb) {
-            case (1): 
-                StartFromZero();
-            case (2):
-                AddFile();
-            case(3):
-                ListFiles();
-            case(4):
-                Scanner scnr = new Scanner(System.in);
-                String name = scnr.nextLine();
-                ExtractFile(name);
-            case(5):
-                Scanner scan = new Scanner(System.in);
-                String nme = scan.nextLine();
-                RemoveFile(nme);
+        menu();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Press 1 to do another operation");
+        Integer nmb = new Integer (sc.nextLine());
+        if (nmb == 1) {
+            menu();
+        } else {
+            
         }
     }
     
@@ -56,6 +48,27 @@ public class Archiver {
         System.out.println("4. Extract a file from the archive;");
         System.out.println("5. Remove a file from the archive.");
         Integer option = new Integer (sc.nextLine());
+        switch (option) {
+            case (1): 
+                StartFromZero();
+            case (2):
+                AddFile();
+            case(3):
+                ListFiles();
+            case(4):
+                Scanner scnr = new Scanner(System.in);
+                String name = scnr.nextLine();
+                try {
+                    ExtractFile(name);
+                }
+                catch (IOException e) {
+                    System.out.println("Error");
+                }
+            case(5):
+                Scanner scan = new Scanner(System.in);
+                String nme = scan.nextLine();
+                RemoveFile(nme);
+        }
         return option;
     }
     
