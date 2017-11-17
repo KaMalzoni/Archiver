@@ -139,7 +139,7 @@ public class Archiver {
     
     public static void ListFiles () {                                                   //OK
         for(Head head : listOfHeads){
-            if(head.status == true) {
+            if(head.status.equals(true)) {
                 System.out.println(" " + head.nome + " ");
             }
         }
@@ -148,7 +148,7 @@ public class Archiver {
     public static void RemoveFile (String nome) { //remover o arquivo do archive
         for(Head head : listOfHeads){
             if (head.nome.equals(nome)) {
-                head.status = false;
+                head.setStatus(Boolean.FALSE);
             }
         }
     }
