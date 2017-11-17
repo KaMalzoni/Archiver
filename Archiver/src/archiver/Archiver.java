@@ -29,8 +29,8 @@ public class Archiver {
      */
     public static void main(String[] args) {
         menu();
-        Scanner sc = new Scanner(System.in);
         System.out.println("Press 1 to do another operation");
+        Scanner sc = new Scanner(System.in);
         Integer nmb = new Integer (sc.nextLine());
         if (nmb == 1) {
             menu();
