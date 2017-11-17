@@ -92,7 +92,8 @@ public class Archiver {
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
             for(Head head : listOfHeads){
-                fos.write(head.getBytes(), 0, Head.getHeadSize());
+                addToZipFile(head.nome, fos);
+                //fos.write(head.getBytes(), 0, Head.getHeadSize());
             }
             for (String file : files) {
                 addToZipFile(file, fos);
