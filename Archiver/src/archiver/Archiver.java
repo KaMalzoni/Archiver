@@ -139,7 +139,9 @@ public class Archiver {
     
     public static void ListFiles () {                                                   //OK
         for(Head head : listOfHeads){
-            System.out.println(head.nome);
+            if(head.status == true) {
+                System.out.println(head.nome);
+            }
         }
         }
     
