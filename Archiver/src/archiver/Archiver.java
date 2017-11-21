@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class Archiver {
 
-    public static ArrayList<Head> listOfHeads = new ArrayList();
-    public static int headSize = Head.getHeadSize();
-    public static String [] files; 
+    public static ArrayList<Head> listOfHeads = new ArrayList(); //lista de cabeçalhos
+    public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (é fixo)
+    public static String [] files; //lista dos arquivos
     
     /**
      * @param args the command line arguments
@@ -89,7 +89,7 @@ public class Archiver {
      */
     public static void StartFromZero () {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Please insert the number of files to be compressed");
+        System.out.println("Please insert the number of files to be compressed");  //scaneia o numero de arquivos a serem inseridos no archive
         Integer nmbf = new Integer (sc.nextLine()); 
         files = new String [nmbf];
         int pos = nmbf * headSize;
@@ -104,8 +104,8 @@ public class Archiver {
         try {
             FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
             for(Head head : listOfHeads){
-                //addToZipFile(head.nome, fos);
-                fos.write(head.getBytes(), 0, Head.getHeadSize());
+                addToZipFile(head.nome, fos);
+                //fos.write(head.getBytes(), 0, Head.getHeadSize());
             }
             for (String file : files) {
                 addToZipFile(file, fos);
@@ -139,7 +139,7 @@ public class Archiver {
     
     public static void ListFiles () {                                                   //OK
         for(Head head : listOfHeads){
-            if(head.status == true) {
+            if(head.status.equals(true)) {
                 System.out.println(" " + head.nome + " ");
             }
         }
@@ -148,7 +148,7 @@ public class Archiver {
     public static void RemoveFile (String nome) { //remover o arquivo do archive
         for(Head head : listOfHeads){
             if (head.nome.equals(nome)) {
-                head.status = false;
+                head.setStatus(Boolean.FALSE);
             }
         }
     }
