@@ -16,11 +16,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Archiver {
 
-    public static ArrayList<Head> listOfHeads = new ArrayList(); //lista de cabeçalhos
+    public static LinkedList<Head> listOfHeads = new LinkedList(); //lista de cabeçalhos
     public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (é fixo)
     public static String [] files; //lista dos arquivos
     
