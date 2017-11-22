@@ -15,16 +15,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+<<<<<<< HEAD:Archiver/src/archiver/Archiver.java
 //import java.util.ArrayList;
+=======
+import java.io.PrintWriter;
+>>>>>>> ad281b103966fd9291e4437c0c472257e9058a0f:Archiver-master/Archiver/src/archiver/Archiver.java
 import java.util.LinkedList;
 
 public class Archiver {
 
     public static LinkedList<Head> listOfHeads = new LinkedList(); //lista de cabeçalhos
+<<<<<<< HEAD:Archiver/src/archiver/Archiver.java
     public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (é fixo)
+=======
+    public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (fixo)
+>>>>>>> ad281b103966fd9291e4437c0c472257e9058a0f:Archiver-master/Archiver/src/archiver/Archiver.java
     public static String [] files; //lista dos arquivos
-    
+   
     /**
      * @param args the command line arguments
      */
@@ -32,7 +41,7 @@ public class Archiver {
         menu();
         int aux;
         do {
-        System.out.println("Press 1 to do another operation");
+        System.out.println("Press 1 to do another operation or anything else to leave");
         Scanner sc = new Scanner(System.in);
         Integer nmb = new Integer (sc.nextLine());
         if (nmb == 1) {
@@ -57,7 +66,10 @@ public class Archiver {
                 break;
             }
             case (2): {
-                AddFile();
+                System.out.println("Insert the name os the file to bem extracted");
+                Scanner scnr = new Scanner(System.in);
+                String name = scnr.nextLine();
+                AddFile(name);
                 break;
             }
             case(3): {
@@ -89,33 +101,37 @@ public class Archiver {
      * aqui está o javadoc de startfromzero
      */
     public static void StartFromZero () {
+        //FileWriter data; 
         Scanner sc = new Scanner(System.in);
         System.out.println("Please insert the number of files to be compressed");  //scaneia o numero de arquivos a serem inseridos no archive
         Integer nmbf = new Integer (sc.nextLine()); 
         files = new String [nmbf];
         int pos = nmbf * headSize;
-        for (int i = 0; i < files.length; i++){
-            System.out.println("Please insert the name of the file to be compressed");
-            File fname = new File (sc.nextLine());
-            files[i] = fname.toString();
-            Head cab = new Head(fname.length(),pos,true,i,nmbf);
+        for (int i = 0; i < files.length; i++){                                         
+            System.out.println("Please insert the name of the file to be compressed");  
+            File fname = new File (sc.nextLine());                  
+            files[i] = fname.toString();                            //este laço scaneia o nome dos arquivos a serem inseridos no archive
+            Head cab = new Head(fname.length(),pos,true,i,nmbf);    //e, para cada aqrquivo, cria um cabeçalho e o coloca na lista de cabeçalhos
             listOfHeads.add(cab);
             pos += fname.length();
         }
         try {
-            FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
-            for(Head head : listOfHeads){
-                addToZipFile(head.nome, fos);
-                //fos.write(head.getBytes(), 0, Head.getHeadSize());
+            try (PrintWriter data = new PrintWriter("headers.txt", "UTF-8")) {  
+                for (int i = 0; i < listOfHeads.size(); i++) {  //este bloco try coloca o conteúdo da lista de cabeçalhos
+                    data.println(listOfHeads.get(i));           //para que não se perca a informação sobre os files quando acabar a excecução do programa
+                }
             }
-            for (String file : files) {
-                addToZipFile(file, fos);
+            FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
+            for (String file : files) {                                         //este laço for chama o método addToZipFile para cada arquivo
+                addToZipFile(file, fos);                                        //este método escreve, byte a byte, o file no archive
             }
             cleanUP(fos);
         }
         catch (FileNotFoundException e) {
+            System.out.println("error, file not found");
 	}
         catch (IOException e) {
+            System.out.println("system error");
 	}
     }
     
@@ -138,18 +154,19 @@ public class Archiver {
         fos.close();
     }
     
-    public static void ListFiles () {                                                   //OK
+    public static void ListFiles () {
+        String aux = null;
         for(Head head : listOfHeads){
-            if(head.status.equals(true)) {
-                System.out.println(" " + head.nome + " ");
+           if (head.status == true) //printa na tela o nome dos arquivos com status "true"
+                aux = head.getNome();
+                System.out.println(aux);
             }
         }
-        }
     
-    public static void RemoveFile (String nome) { //remover o arquivo do archive
+    public static void RemoveFile (String n) { //remover o arquivo do archive
         for(Head head : listOfHeads){
-            if (head.nome.equals(nome)) {
-                head.setStatus(Boolean.FALSE);
+            if (head.nome.equals(n)) {
+                head.setStatus(Boolean.FALSE);  //marca o atributo status como false
             }
         }
     }
@@ -169,7 +186,13 @@ public class Archiver {
         }
     }
     
-    public static void AddFile() {
-        
+    public static void AddFile(String n) {
+        int pos = (int) (listOfHeads.getLast().pos + listOfHeads.getLast().size);
+        File fname = new File (n);
+        Head cab = new Head(fname.length(),pos,true,listOfHeads.size() - 1,listOfHeads.size());
+            listOfHeads.add(cab);
     }
-    }
+    
+}
+
+   
