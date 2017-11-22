@@ -15,9 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 
@@ -48,10 +46,8 @@ public class Archiver {
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do?");
         System.out.println("1. Start an archive from zero;");
-        System.out.println("2. Add a file to the archive;");
-        System.out.println("3. List all the files on the archive;");
-        System.out.println("4. Extract a file from the archive;");
-        System.out.println("5. Remove a file from the archive.");
+        System.out.println("2. List all the files on the archive;");
+        System.out.println("3. Remove a file from the archive.;");
         Integer option = new Integer (sc.nextLine());
         switch (option) {
             case (1): {
@@ -59,34 +55,14 @@ public class Archiver {
                 break;
             }
             case (2): {
-                System.out.println("Insert the name os the file to bem extracted");
-                Scanner scnr = new Scanner(System.in);
-                String name = scnr.nextLine();
-                AddFile(name);
-                break;
-            }
-            case(3): {
                 ListFiles(); 
                 break;
             }
-            case(4): {
-                System.out.println("Insert the name os the file to bem extracted");
-                Scanner scnr = new Scanner(System.in);
-                String name = scnr.nextLine();
-                try {
-                    ExtractFile(name);
-                }
-                catch (IOException e) {
-                    System.out.println("Error");
-                }
-                break;
-            }
-            case(5): {
+            case(3): {
                 System.out.println("Insert the name os the file to bem removed");
                 Scanner scan = new Scanner(System.in);
                 String nme = scan.nextLine();
                 RemoveFile(nme);
-            break;
             }
         }
     }
@@ -148,10 +124,8 @@ public class Archiver {
     }
     
     public static void ListFiles () {
-        String aux = null;
         for(Head head : listOfHeads){
            if (head.status.equals(true)) { //printa na tela o nome dos arquivos com status "true"
-                aux = head.getNome();
                 System.out.println(head.getNome());
             }
         }
@@ -163,28 +137,6 @@ public class Archiver {
                 head.setStatus(Boolean.FALSE);  //marca o atributo status como false
             }
         }
-    }
-    
-    public static void ExtractFile (String nome) throws IOException, FileNotFoundException { //extrair o arquivo do archive (cria CÓPIA)
-        for(Head head : listOfHeads){
-            if (head.nome.equals(nome)) {
-                FileInputStream fis = new FileInputStream(nome);
-                FileOutputStream f = new FileOutputStream("arqextraido");
-		byte[] bytes = new byte[1024];
-		int length;
-		while ((length = fis.read(bytes)) >= 0) {
-			f.write(bytes, 0, length);
-		}
-		fis.close();
-            }
-        }
-    }
-    
-    public static void AddFile(String n) {
-        int pos = (int) (listOfHeads.getLast().pos + listOfHeads.getLast().size);
-        File fname = new File (n);
-        Head cab = new Head(fname.length(),pos,true,listOfHeads.size() - 1,listOfHeads.size());
-            listOfHeads.add(cab);
     }
     
 }
