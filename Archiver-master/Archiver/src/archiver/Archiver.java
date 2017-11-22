@@ -33,7 +33,7 @@ public class Archiver {
         menu();
         int aux;
         do {
-        System.out.println("Press 1 to do another operation");
+        System.out.println("Press 1 to do another operation or anything else to leave");
         Scanner sc = new Scanner(System.in);
         Integer nmb = new Integer (sc.nextLine());
         if (nmb == 1) {
@@ -58,7 +58,10 @@ public class Archiver {
                 break;
             }
             case (2): {
-                AddFile();
+                System.out.println("Insert the name os the file to bem extracted");
+                Scanner scnr = new Scanner(System.in);
+                String name = scnr.nextLine();
+                AddFile(name);
                 break;
             }
             case(3): {
@@ -144,11 +147,12 @@ public class Archiver {
     }
     
     public static void ListFiles () {
+        String aux = null;
         for(Head head : listOfHeads){
-            if(head.status.equals(true)) {    //printa na tela o nome dos arquivos com status "true"
-                System.out.println(head.nome);
+           if (head.status == true) //printa na tela o nome dos arquivos com status "true"
+                aux = head.getNome();
+                System.out.println(aux);
             }
-        }
         }
     
     public static void RemoveFile (String n) { //remover o arquivo do archive
