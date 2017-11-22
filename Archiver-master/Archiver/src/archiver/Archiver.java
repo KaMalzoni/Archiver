@@ -17,13 +17,21 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+<<<<<<< HEAD:Archiver/src/archiver/Archiver.java
+//import java.util.ArrayList;
+=======
 import java.io.PrintWriter;
+>>>>>>> ad281b103966fd9291e4437c0c472257e9058a0f:Archiver-master/Archiver/src/archiver/Archiver.java
 import java.util.LinkedList;
 
 public class Archiver {
 
     public static LinkedList<Head> listOfHeads = new LinkedList(); //lista de cabeçalhos
+<<<<<<< HEAD:Archiver/src/archiver/Archiver.java
+    public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (é fixo)
+=======
     public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (fixo)
+>>>>>>> ad281b103966fd9291e4437c0c472257e9058a0f:Archiver-master/Archiver/src/archiver/Archiver.java
     public static String [] files; //lista dos arquivos
    
     /**
@@ -151,7 +159,7 @@ public class Archiver {
         for(Head head : listOfHeads){
            if (head.status.equals(true)) //printa na tela o nome dos arquivos com status "true"
                 aux = head.getNome();
-                System.out.println("%s" ,head.getNome());
+                System.out.format("%s" ,head.getNome());
             }
         }
     
