@@ -151,7 +151,7 @@ public class Archiver {
         for(Head head : listOfHeads){
            if (head.status.equals(true)) //printa na tela o nome dos arquivos com status "true"
                 aux = head.getNome();
-                System.out.println(aux);
+                System.out.println("%s" ,head.getNome());
             }
         }
     
