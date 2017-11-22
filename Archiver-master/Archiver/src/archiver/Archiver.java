@@ -18,16 +18,13 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-//import static java.nio.file.Files.list;
-//import static java.rmi.Naming.list;
-import java.util.ArrayList;
-//import static java.util.Collections.list;
+import java.util.LinkedList;
 
 public class Archiver {
 
-    public static ArrayList<Head> listOfHeads = new ArrayList(); //lista de cabeçalhos
-    public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (é fixo)
-    public static String [] files; //lista dos arquivo
+    public static LinkedList<Head> listOfHeads = new LinkedList(); //lista de cabeçalhos
+    public static int headSize = Head.getHeadSize(); //tamanho de um cabeçalho (fixo)
+    public static String [] files; //lista dos arquivos
    
     /**
      * @param args the command line arguments
@@ -99,33 +96,31 @@ public class Archiver {
         Integer nmbf = new Integer (sc.nextLine()); 
         files = new String [nmbf];
         int pos = nmbf * headSize;
-        for (int i = 0; i < files.length; i++){
-            System.out.println("Please insert the name of the file to be compressed");
-            File fname = new File (sc.nextLine());
-            files[i] = fname.toString();
-            Head cab = new Head(fname.length(),pos,true,i,nmbf);
+        for (int i = 0; i < files.length; i++){                                         
+            System.out.println("Please insert the name of the file to be compressed");  
+            File fname = new File (sc.nextLine());                  
+            files[i] = fname.toString();                            //este laço scaneia o nome dos arquivos a serem inseridos no archive
+            Head cab = new Head(fname.length(),pos,true,i,nmbf);    //e, para cada aqrquivo, cria um cabeçalho e o coloca na lista de cabeçalhos
             listOfHeads.add(cab);
             pos += fname.length();
         }
         try {
-            try (PrintWriter data = new PrintWriter("headers.txt", "UTF-8")) {
-                for (int i = 0; i < listOfHeads.size(); i++) {
-                    data.println(listOfHeads.get(i));
+            try (PrintWriter data = new PrintWriter("headers.txt", "UTF-8")) {  
+                for (int i = 0; i < listOfHeads.size(); i++) {  //este bloco try coloca o conteúdo da lista de cabeçalhos
+                    data.println(listOfHeads.get(i));           //para que não se perca a informação sobre os files quando acabar a excecução do programa
                 }
             }
             FileOutputStream fos = new FileOutputStream("arqcompactado.aa");
-            //for(Head head : listOfHeads){
-                //addToZipFile(head.nome, fos);                               ARRUMAR ESSA BAGAÇA!!!!
-                //fos.write(head.getBytes(), 0, Head.getHeadSize());
-            //}
-            for (String file : files) {
-                addToZipFile(file, fos);
+            for (String file : files) {                                         //este laço for chama o método addToZipFile para cada arquivo
+                addToZipFile(file, fos);                                        //este método escreve, byte a byte, o file no archive
             }
             cleanUP(fos);
         }
         catch (FileNotFoundException e) {
+            System.out.println("error, file not found");
 	}
         catch (IOException e) {
+            System.out.println("system error");
 	}
     }
     
@@ -156,10 +151,10 @@ public class Archiver {
         }
         }
     
-    public static void RemoveFile (String nome) { //remover o arquivo do archive
+    public static void RemoveFile (String n) { //remover o arquivo do archive
         for(Head head : listOfHeads){
-            if (head.nome.equals(nome)) {
-                head.setStatus(Boolean.FALSE);
+            if (head.nome.equals(n)) {
+                head.setStatus(Boolean.FALSE);  //marca o atributo status como false
             }
         }
     }
@@ -179,11 +174,13 @@ public class Archiver {
         }
     }
     
-    public static void AddFile() {
-        
+    public static void AddFile(String n) {
+        int pos = (int) (listOfHeads.getLast().pos + listOfHeads.getLast().size);
+        File fname = new File (n);
+        Head cab = new Head(fname.length(),pos,true,listOfHeads.size() - 1,listOfHeads.size());
+            listOfHeads.add(cab);
     }
+    
+}
 
-    public Archiver() {
-        //this.data = new FileWriter("datafile.txt" ,true);
-    }
-    }
+   
