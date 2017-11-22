@@ -143,9 +143,9 @@ public class Archiver {
         fos.close();
     }
     
-    public static void ListFiles () {                                                   //OK
+    public static void ListFiles () {
         for(Head head : listOfHeads){
-            if(head.status.equals(true)) {
+            if(head.status.equals(true)) {    //printa na tela o nome dos arquivos com status "true"
                 System.out.println(head.nome);
             }
         }
