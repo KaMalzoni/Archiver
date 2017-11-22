@@ -149,7 +149,7 @@ public class Archiver {
     public static void ListFiles () {
         String aux = null;
         for(Head head : listOfHeads){
-           if (head.status == true) //printa na tela o nome dos arquivos com status "true"
+           if (head.status.equals(true)) //printa na tela o nome dos arquivos com status "true"
                 aux = head.getNome();
                 System.out.println(aux);
             }
